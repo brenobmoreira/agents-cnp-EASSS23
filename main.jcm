@@ -1,1 +1,9 @@
-// wip
+mas main {
+
+    agent gerente : initiator.asl
+    
+    agent pintor1 : participant.asl
+    agent pintor2 : participant.asl
+    agent pintor3 : participant.asl
+
+}
