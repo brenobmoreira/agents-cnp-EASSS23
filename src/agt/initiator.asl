@@ -1,13 +1,19 @@
-!iniciar_leilao.
+!start.
 
-+!iniciar_leilao 
-   <- .print("Preciso de alguem para pintar_parede");
++!start
+    <- .print("Iniciando múltiplos leilões em paralelo...");
+    !!iniciar_leilao(pintar_parede);
+    !!iniciar_leilao(instalar_luz);
+    !!iniciar_leilao(trocar_piso).
+
++!iniciar_leilao(Servico) 
+   <- .print("Preciso de ", Servico);
       // Envia mensagem para todos agentes ativos
-      .broadcast(tell, cfp(pintar_parede));
+      .broadcast(tell, cfp(Servico));
 
       .wait(2000);
 
-      !escolher_vencedor(pintar_parede).
+      !escolher_vencedor(Servico).
 
 +propose(Servico, Preco)[source(Participante)] 
    <- .print("Recebi proposta do ", Participante, ": R$ ", Preco, " para o servico de ", Servico).

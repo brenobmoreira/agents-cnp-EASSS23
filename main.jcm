@@ -1,11 +1,11 @@
 mas main {
 
     agent gerente : initiator.asl {
-        instances: 5
+        instances: 1
     }
     
     agent operario : participant.asl {
-        instances: 150
+        instances: 1
     }
 
 }
