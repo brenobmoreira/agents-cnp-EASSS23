@@ -5,6 +5,7 @@ import csv
 import signal
 import psutil
 import re
+from pathlib import Path
 
 baterias = [
     # Bateria 1: O Gargalo de Processamento (Estressando m - Base de Crenças)
@@ -32,7 +33,9 @@ baterias = [
     {"bateria": 4, "n": 200, "m": 50, "i": 10} # 100.000+ mensagens geradas
 ]
 
-ARQUIVO_JCM = "../main.jcm"
+RAIZ_PROJETO = Path(__file__).resolve().parent.parent
+ARQUIVO_JCM = RAIZ_PROJETO / "main.jcm"
+GRADLEW = RAIZ_PROJETO / "gradlew"
 ARQUIVO_CSV = "result.csv"
 
 def gerar_jcm(n, m, i):
@@ -56,11 +59,11 @@ def rodar_teste(config):
     gerar_jcm(n, m, i)
     
     processo = subprocess.Popen(
-        ["../gradlew", "--no-daemon", "--console=plain"], 
+        [str(GRADLEW), "--no-daemon", "--console=plain"], 
         stdout=subprocess.PIPE, 
         stderr=subprocess.PIPE,
         text=True,
-        cwd="..",
+        cwd=RAIZ_PROJETO,
         preexec_fn=os.setsid 
     )
 
